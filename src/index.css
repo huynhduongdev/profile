@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-family: Manrope, 'SF Pro Text', 'Segoe UI', sans-serif;
+  background: #03050a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(111, 164, 242, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 82% 18%, rgba(77, 190, 255, 0.26) 0%, transparent 44%),
+    radial-gradient(circle at 78% 78%, rgba(150, 116, 255, 0.2) 0%, transparent 38%),
+    linear-gradient(150deg, #02040a 0%, #050912 35%, #080f1d 60%, #0b1529 100%);
+  color: #ecf3ff;
+  font-family: Manrope, 'SF Pro Text', 'Segoe UI', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: -20%;
+  z-index: -10;
+  pointer-events: none;
+}
+
+body::before {
+  background:
+    radial-gradient(circle, rgba(121, 198, 255, 0.22) 0%, rgba(121, 198, 255, 0) 55%) 20%
+      24% / 38% 38% no-repeat,
+    radial-gradient(circle, rgba(189, 161, 255, 0.18) 0%, rgba(189, 161, 255, 0) 60%) 82%
+      70% / 42% 42% no-repeat;
+  filter: blur(20px);
+  animation: ambient-float 24s ease-in-out infinite alternate;
+}
+
+body::after {
+  background:
+    radial-gradient(circle, rgba(76, 145, 255, 0.14) 0%, rgba(76, 145, 255, 0) 60%) 78%
+      20% / 34% 34% no-repeat,
+    radial-gradient(circle, rgba(110, 224, 255, 0.12) 0%, rgba(110, 224, 255, 0) 62%) 15%
+      82% / 35% 35% no-repeat;
+  filter: blur(32px);
+  animation: ambient-drift 34s linear infinite;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(124, 186, 255, 0.35);
+  color: #f9fcff;
+}
+
+@layer components {
+  .glass-window {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.035) 48%,
+        rgba(174, 225, 255, 0.04) 100%
+      );
+    backdrop-filter: blur(28px) saturate(130%);
+    -webkit-backdrop-filter: blur(28px) saturate(130%);
+  }
+
+  .glass-panel {
+    background:
+      linear-gradient(125deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04) 52%),
+      rgba(16, 24, 45, 0.45);
+    border: 1px solid rgba(199, 225, 255, 0.24);
+    backdrop-filter: blur(24px) saturate(135%);
+    -webkit-backdrop-filter: blur(24px) saturate(135%);
+  }
+
+  .glass-card {
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.055) 42%,
+        rgba(159, 215, 255, 0.035) 100%
+      );
+    border: 1px solid rgba(195, 221, 255, 0.2);
+    backdrop-filter: blur(20px) saturate(130%);
+    -webkit-backdrop-filter: blur(20px) saturate(130%);
+  }
+
+  .glass-sweep {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-sweep::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: -62%;
+    width: 44%;
+    height: 280%;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.24),
+      rgba(255, 255, 255, 0)
+    );
+    transform: rotate(22deg);
+    animation: glass-sweep 10s linear infinite;
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+
+  .text-shine {
+    background: linear-gradient(110deg, #ffffff 10%, #b8d5ff 46%, #f9fdff 84%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .noise-mask {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .noise-mask::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.42) 0.55px, transparent 0.55px);
+    background-size: 3px 3px;
+    mix-blend-mode: soft-light;
+  }
+}
+
+@keyframes ambient-float {
+  0% {
+    transform: translate3d(-1.4%, -1.8%, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(1.8%, 1.2%, 0) scale(1.06);
+  }
+}
+
+@keyframes ambient-drift {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.02);
+  }
+  100% {
+    transform: rotate(-2deg) scale(1.04);
+  }
+}
+
+@keyframes glass-sweep {
+  0% {
+    transform: translateX(-120%) rotate(22deg);
+  }
+  100% {
+    transform: translateX(420%) rotate(22deg);
+  }
+}
